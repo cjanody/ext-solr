@@ -270,6 +270,42 @@ class IndexerTest extends IntegrationTest
     }
 
     /**
+     * This testcase should check if we can queue an custom record with multiple nested MM relations.
+     *
+     * @test
+     */
+    public function canIndexMultipleNestedMMRelatedItems(): void
+    {
+        $this->cleanUpSolrServerAndAssertEmpty('core_en');
+
+        // create fake extension database table and TCA
+        $this->importExtTablesDefinition('fake_extension2_table.sql');
+        $GLOBALS['TCA']['tx_fakeextension_domain_model_bar']       =
+            include($this->getFixturePathByName('fake_extension2_bar_tca.php'));
+        $GLOBALS['TCA']['tx_fakeextension_domain_model_mmrelated'] =
+            include($this->getFixturePathByName('fake_extension2_mmrelated_tca.php'));
+        $GLOBALS['TCA']['tx_fakeextension_domain_model_nestedmmrelated'] =
+            include($this->getFixturePathByName('fake_extension2_nestedmmrelated_tca.php'));
+        $this->importDataSetFromFixture('can_index_custom_record_with_mulitple_nested_mm_relations.xml');
+
+        $result = $this->addToQueueAndIndexRecord('tx_fakeextension_domain_model_bar', 88);
+        $this->assertTrue($result, 'Indexing was not indicated to be successful');
+
+        // do we have the record in the index with the value from the mm relation?
+        $this->waitToBeVisibleInSolr('core_en');
+        $solrContent = file_get_contents('http://localhost:8999/solr/core_en/select?q=*:*');
+
+        $decodedSolrContent = json_decode($solrContent);
+        $types               = $decodedSolrContent->response->docs[0]->type_stringM;
+
+        $this->assertSame(["the type", "the second type"], $types, $solrContent, 'Did not find nested MM related types');
+        $this->assertContains('"numFound":1', $solrContent, 'Could not index document into solr');
+        $this->assertContains('"title":"the document"', $solrContent, 'Could not index document into solr');
+
+        $this->cleanUpSolrServerAndAssertEmpty('core_en');
+    }
+
+    /**
      * This testcase should check if we can queue an custom record with MM relations and respect the additionalWhere clause.
      *
      * @test

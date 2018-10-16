@@ -2,9 +2,9 @@
 
 return [
     'ctrl' => [
-        'title' => $ll . 'tx_fakeextension_domain_model_mmrelated',
-        'descriptionColumn' => 'tag',
-        'label' => 'tag',
+        'title' => $ll . 'tx_fakeextension_domain_model_nestedmmrelated',
+        'descriptionColumn' => 'type',
+        'label' => 'type',
         'hideAtCopy' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -26,7 +26,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime'
         ],
-        'searchFields' => 'uid,tag',
+        'searchFields' => 'uid,type',
     ],
     'interface' => [
         'showRecordFieldList' => 'cruser_id,pid,sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,tag'
@@ -132,7 +132,7 @@ return [
                 'default' => 0,
             ]
         ],
-        'tag' => [
+        'type' => [
             'exclude' => 0,
             'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:cms/locallang_ttc.xlf:header_formlabel',
@@ -140,23 +140,6 @@ return [
                 'type' => 'input',
                 'size' => 60,
                 'eval' => 'required',
-            ]
-        ],
-        // mm relation
-        'types' => [
-            'exclude' => 1,
-            'label' => 'Types:',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'tx_fakeextension_domain_model_nestedmmrelated',
-                'MM' => 'tx_fakeextension_domain_model_nested_related_mm',
-                //@todo is the really as needed in the typo3 core?
-                'foreign_table' => 'tx_fakeextension_domain_model_nestedmmrelated',
-                'size' => '5',
-                'maxitems' => '200',
-                'minitems' => '0',
-                'show_thumbs' => '1'
             ]
         ],
         'editlock' => [

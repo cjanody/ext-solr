@@ -101,22 +101,10 @@
         <tablenames>tx_fakeextension_domain_model_mmrelated</tablenames>
     </tx_fakeextension_domain_model_related_mm>
 
-    <tx_fakeextension_domain_model_related_mm>
-        <uid_local>88</uid_local>
-        <uid_foreign>9</uid_foreign>
-        <tablenames>tx_fakeextension_domain_model_mmrelated</tablenames>
-    </tx_fakeextension_domain_model_related_mm>
-
     <tx_fakeextension_domain_model_mmrelated>
         <uid>8</uid>
         <pid>1</pid>
         <tag>the tag</tag>
-    </tx_fakeextension_domain_model_mmrelated>
-
-    <tx_fakeextension_domain_model_mmrelated>
-        <uid>9</uid>
-        <pid>1</pid>
-        <tag>the second tag</tag>
     </tx_fakeextension_domain_model_mmrelated>
 
     <tx_fakeextension_domain_model_nested_related_mm>
@@ -128,12 +116,6 @@
     <tx_fakeextension_domain_model_nested_related_mm>
         <uid_local>8</uid_local>
         <uid_foreign>4</uid_foreign>
-        <tablenames>tx_fakeextension_domain_model_nestedmmrelated</tablenames>
-    </tx_fakeextension_domain_model_nested_related_mm>
-
-    <tx_fakeextension_domain_model_nested_related_mm>
-        <uid_local>9</uid_local>
-        <uid_foreign>10</uid_foreign>
         <tablenames>tx_fakeextension_domain_model_nestedmmrelated</tablenames>
     </tx_fakeextension_domain_model_nested_related_mm>
 

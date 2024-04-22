@@ -1452,3 +1452,27 @@ Though this setting limits the returned variants, you still can get the number o
 :TS Path: plugin.tx_solr.search.variants.limit
 :Since: 6.0
 :Default: 10
+
+shard
+-------
+
+shard.languages
+~~~~~~~~~~~~~~~
+
+:Type: String
+:TS Path: plugin.tx_solr.search.shard.languages
+:Since:
+:Default:
+
+Adds the shard parameter to the solr request for doing search requests across multiple cores (core per language).
+
+**Note:**:
+
+    * Pro: Use language individual stemming
+    * Contra: Variants do not work across shards
+
+.. code-block:: typoscript
+
+    # de language = 0
+    # en language = 1
+    plugin.tx_solr.search.shard.languages = 0,1

@@ -85,6 +85,11 @@ defined('TYPO3_MODE') || die();
         \ApacheSolrForTypo3\Solr\Search\ElevationComponent::class
     );
 
+    \ApacheSolrForTypo3\Solr\Search\SearchComponentManager::registerSearchComponent(
+        'shard',
+        \ApacheSolrForTypo3\Solr\Search\ShardComponent::class
+    );
+
     // ----- # ----- # ----- # ----- # ----- # ----- # ----- # ----- # ----- #
 
     // adding scheduler tasks

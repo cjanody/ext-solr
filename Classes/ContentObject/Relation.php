@@ -181,18 +181,13 @@ class Relation extends AbstractContentObject
             if (isset($foreignTableTca['columns'][$foreignTableLabelField]['config']['foreign_table'])
                 && $this->configuration['enableRecursiveValueResolution']
             ) {
-                if (strpos($this->configuration['foreignLabelField'], '.') !== false) {
-                    $foreignTableLabelFieldArr = explode('.', $this->configuration['foreignLabelField']);
-                    unset($foreignTableLabelFieldArr[0]);
-                    $this->configuration['foreignLabelField'] = implode('.', $foreignTableLabelFieldArr);
-                }
-
                 $this->configuration['localField'] = $foreignTableLabelField;
 
                 $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
                 $contentObject->start($record, $foreignTableName);
 
-                return $this->getRelatedItems($contentObject);
+                $relatedItems = array_merge($relatedItems, $this->getRelatedItems($contentObject));
+                continue;
             }
             if (Util::getLanguageUid() > 0) {
                 $record = $this->frontendOverlayService->getOverlay($foreignTableName, $record);

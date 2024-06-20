@@ -104,14 +104,16 @@ class PageUidToHierarchy extends AbstractHierarchyProcessor implements FieldProc
         }
 
         foreach ($rootline as $page) {
+            if ($page['nav_hide'] !== 0 || in_array($page['doktype'], [3, 4, 6, 7, 199, 254, 255], true)) {
+                continue;
+            }
+
+            array_unshift($rootlinePageIds, $page['uid']);
+
             if (SiteUtility::isRootPage($page)) {
                 break;
             }
-
-            array_unshift($rootlinePageIds, $page['pid']);
         }
-
-        $rootlinePageIds[] = $pageId;
 
         return $rootlinePageIds;
     }
